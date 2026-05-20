@@ -1,47 +1,57 @@
 package ec.edu.puce.githubclient.ui.screens
 
+import android.R
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import ec.edu.puce.githubclient.ui.theme.compose.RepoItem
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import ec.edu.puce.githubclient.ui.components.RepoItem
+import ec.edu.puce.githubclient.viewmodels.RepoListViewModel
 
-@Preview(showBackground = true)
+
 @Composable
 fun RepoList(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: RepoListViewModel = viewModel()
 ) {
+    val repos by viewModel.repos.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val errorMsg by viewModel.errorMsg.collectAsState()
 
-    Column(
-        modifier = modifier
+    Box(
+        modifier = modifier.fillMaxSize()
     ) {
-
-        RepoItem(
-            name = "Repositorio",
-            description = "Repositorio creado para desarrollo móvil",
-            avatarUrl = "https://avatars.githubusercontent.com/u/1?v=4",
-            lenguaje = "Kotlin"
-        )
-
-        RepoItem(
-            name = "Repositorio ",
-            description = "Repositorio creado para desarrollo móvil",
-            avatarUrl = "https://avatars.githubusercontent.com/u/1?v=4",
-            lenguaje = "Kotlin"
-        )
-
-        RepoItem(
-            name = "Repositorio",
-            description = "Repositorio creado para desarrollo móvil",
-            avatarUrl = "https://avatars.githubusercontent.com/u/1?v=4",
-            lenguaje = "Kotlin"
-        )
-
-        RepoItem(
-            name = "Repositorio ",
-            description = "Repositorio creado para desarrollo móvil",
-            avatarUrl = "https://avatars.githubusercontent.com/u/1?v=4",
-            lenguaje = "Kotlin"
-        )
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
+        errorMsg?.let {
+            Text(
+                text = it,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.align(Alignment.Center)
+                    .padding( all = 16.dp)
+            )
+        }
+        if (!isLoading && errorMsg.isNullOrBlank()) {
+            LazyColumn (modifier = Modifier.fillMaxSize()) {
+                items( count = repos.size) { i ->
+                    RepoItem(repository = repos[i])
+                }
+            }
+        }
     }
+
 }
