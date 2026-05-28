@@ -56,7 +56,7 @@ fun RepoForm () {
             OutlinedTextField(
                 value = "",
                 onValueChange = {},
-                label = { Text("Nombre de repo")},
+                label = { Text("Nombre de repositorio")},
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
@@ -64,7 +64,7 @@ fun RepoForm () {
             OutlinedTextField(
                 value = "",
                 onValueChange = {},
-                label = { Text("desc de repo")},
+                label = { Text("desc de repositorio")},
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 5
             )
