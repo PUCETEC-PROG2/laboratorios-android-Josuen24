@@ -36,5 +36,5 @@ interface ApiService {
     suspend fun deleteRepository(
         @Path("owner") owner: String,
         @Path("repo") repo: String
-    )
+    ): retrofit2.Response<Unit>
 }
