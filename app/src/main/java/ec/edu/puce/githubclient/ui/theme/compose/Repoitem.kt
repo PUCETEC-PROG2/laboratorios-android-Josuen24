@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import ec.edu.puce.githubclient.models.GitHubUser
+import ec.edu.puce.githubclient.models.GithubUser
 import ec.edu.puce.githubclient.models.Repository
 import org.intellij.lang.annotations.Language
 
@@ -40,7 +40,7 @@ fun RepoItem (
         ) {
             AsyncImage(
                 model = repository.owner.avatarUrl,
-                contentDescription = "Imagen de $repository.name",
+                contentDescription = "Imagen de ${repository.name}",
                 modifier = Modifier.size(68.dp),
                 contentScale = ContentScale.Crop
             )
@@ -80,15 +80,15 @@ fun RepoItem (
 @Preview(showBackground = true)
 @Composable
 fun RepoItemPreview () {
-    val repository = Repository(
-        id = "1234",
-        name = "Repositorio de android",
-        description = "Repositorio paralelo 1471",
+    val repository= Repository(
+        id = "12345",
+        name = "Repositorio de Android",
+        description = "Repositorio de Android paralelo 1471",
         language = "Kotlin",
-        owner = GitHubUser(
+        owner = GithubUser (
             id = "123",
-            login = "josue_nicolalde",
-            avatarUrl = "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FBarcelona_Sporting_Club&ved=0CBYQjRxqFwoTCKDR55rZyJQDFQAAAAAdAAAAABAG&opi=89978449"
+            login = "jdnicolalde",
+            avatarUrl = "XXXXXX"
         )
     )
     RepoItem(repository)
