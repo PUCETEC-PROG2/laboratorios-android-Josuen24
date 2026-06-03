@@ -1,12 +1,10 @@
 package ec.edu.puce.githubclient.models
 
-data class Repository (
+data class Repository(
     val id: String,
     val name: String,
+    val full_name: String,
     val description: String?,
     val language: String?,
     val owner: GithubUser,
-
-
-
-    )
+)
